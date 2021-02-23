@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.parceler.Parcels;
 
 import okhttp3.Headers;
+import okhttp3.internal.concurrent.Task;
 
 public class DetailActivity extends YouTubeBaseActivity {
 
@@ -47,6 +48,7 @@ public class DetailActivity extends YouTubeBaseActivity {
         tvTitle.setText(movie.getTitle());
         tvOverview.setText(movie.getOverview());
         ratingBar.setRating((float) movie.getRating());
+        float rating = (float) movie.getRating();
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(String.format(VIDEOS_URL, movie.getMovieId()), new JsonHttpResponseHandler() {
@@ -76,11 +78,21 @@ public class DetailActivity extends YouTubeBaseActivity {
     }
 
     private void initializeYoutube(final String youtubeKey) {
+
         youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 Log.d("DetailActivity", "onSuccess");
+
                 youTubePlayer.cueVideo(youtubeKey);
+                if (ratingBar.getNumStars() > 5) {
+                    try {
+                        Thread.sleep(5 * 1000);
+                    } catch (InterruptedException ie) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+                youTubePlayer.play();
 
             }
 
