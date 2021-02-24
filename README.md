@@ -25,6 +25,8 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 
 <img src="https://github.com/darras4/Flixster/blob/master/walkthrough2.1.gif" width=250><br>
 
+<img src="https://github.com/darras4/Flixster/blob/master/walkthrough%202.gif" width=250><br>
+
 ### Notes
 Video plays automatically for 5+ stars, but could not find movie <5 stars. Plays in full screen.
 
